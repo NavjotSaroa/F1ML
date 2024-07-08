@@ -40,10 +40,6 @@ def receive_data():
         tyreInnerTempFR = carData.m_tyresInnerTemperature[3]
         drs = carData.m_drs  
 
-
-
-
-
         info["speed"].append(speed)
         if len(info["speed"]) > 3000:
             info["speed"].pop(0)
@@ -108,8 +104,6 @@ def receive_data():
         if len(info["drs"]) > 3000:
             info["drs"].pop(0)
 
-
-
 if __name__ == "__main__":
     file = open("../IPStuff.txt")
     # Set up the UDP server
@@ -140,19 +134,13 @@ if __name__ == "__main__":
         "drs": [],
     }
 
-
-
     receiver_thread = threading.Thread(target = receive_data)
     receiver_thread.daemon = True
     receiver_thread.start()
-
     lines_glow = {}  # Initialize the lines_glow dictionary
-
-
-
     fills = {key: None for key in info.keys()}
 
-    def update_plot(frame, line, data_key):
+    def update_plot(frames, line, data_key):
         artists = [line]
         if info[data_key]:
             xdata = np.arange(len(info[data_key]))
@@ -173,10 +161,8 @@ if __name__ == "__main__":
         
         return artists
 
-
     # Set up the initial plot
     fig, ax = plt.subplots(4,4)
-
     axes = {
         'speed': ax[0, 0],
         'throttle': ax[0, 1],
@@ -196,7 +182,6 @@ if __name__ == "__main__":
         'tyreInnerTempFR': ax[3, 3],
     }
 
-
     fig.patch.set_facecolor('#212946')
     for key, ax in axes.items():
         ax.set_facecolor('#212946')
@@ -207,9 +192,6 @@ if __name__ == "__main__":
         ax.spines['left'].set_color('#D3D3D3')
         ax.spines['right'].set_color('#D3D3D3')
         ax.title.set_color('#D3D3D3')  # Change title color to light gray
-
-
-
 
     # Define line colors for each data key
     line_colors = {
@@ -237,10 +219,6 @@ if __name__ == "__main__":
     for key in axes:
         lines[key] = axes[key].plot([], [], lw=2, color=line_colors[key])[0]
 
-
-
-
-
     axes['speed'].set_ylim(0, 400)
     axes['throttle'].set_ylim(0, 1)
     axes['steer'].set_ylim(-1, 1)
@@ -256,9 +234,6 @@ if __name__ == "__main__":
     axes['tyreInnerTempRR'].set_ylim(90, 110)
     axes['tyreInnerTempFL'].set_ylim(90, 110)
     axes['tyreInnerTempFR'].set_ylim(90, 110)
-
-
-
 
     for key in axes:
         axes[key].set_xlim(0, 3000)
