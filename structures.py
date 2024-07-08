@@ -1,3 +1,8 @@
+"""
+Author: Navjot Saroa
+Structures of the packets received from the F1 23 game
+"""
+
 import ctypes as ct
 
 
@@ -213,28 +218,28 @@ class ParticipantData(ct.LittleEndianStructure):
 class CarSetupData(ct.LittleEndianStructure):
     _pack_ = 1
     _fields_ = [
-        ('m_frontWing', ct.c_uint8),            # Front wing aero
-        ('m_rearWing', ct.c_uint8),             # Rear wing aero
-        ('m_onThrottle', ct.c_uint8),           # Differential adjustment on throttle (percentage)
-        ('m_offThrottle', ct.c_uint8),          # Differential adjustment off throttle (percentage)
-        ('m_frontCamber', ct.c_float),          # Front camber angle (suspension geometry)
-        ('m_rearCamber', ct.c_float),           # Rear camber angle (suspension geometry)
-        ('m_frontToe', ct.c_float),             # Front toe angle (suspension geometry)
-        ('m_rearToe', ct.c_float),              # Rear toe angle (suspension geometry)
-        ('m_frontSuspension', ct.c_uint8),      # Front suspension
-        ('m_rearSuspension', ct.c_uint8),       # Rear suspension
-        ('m_frontAntiRollBar', ct.c_uint8),     # Front anti-roll bar
-        ('m_rearAntiRollBar', ct.c_uint8),      # Rear anti-roll bar
-        ('m_frontSuspensionHeight', ct.c_uint8),# Front ride height
-        ('m_rearSuspensionHeight', ct.c_uint8), # Rear ride height
-        ('m_brakePressure', ct.c_uint8),        # Brake pressure (percentage)
-        ('m_brakeBias', ct.c_uint8),            # Brake bias (percentage)
-        ('m_rearLeftTyrePressure', ct.c_float), # Rear left tyre pressure (PSI)
-        ('m_rearRightTyrePressure', ct.c_float),# Rear right tyre pressure (PSI)
-        ('m_frontLeftTyrePressure', ct.c_float),# Front left tyre pressure (PSI)
-        ('m_frontRightTyrePressure', ct.c_float),# Front right tyre pressure (PSI)
-        ('m_ballast', ct.c_uint8),              # Ballast
-        ('m_fuelLoad', ct.c_float)              # Fuel load
+        ('m_frontWing', ct.c_uint8),                # Front wing aero
+        ('m_rearWing', ct.c_uint8),                 # Rear wing aero
+        ('m_onThrottle', ct.c_uint8),               # Differential adjustment on throttle (percentage)
+        ('m_offThrottle', ct.c_uint8),              # Differential adjustment off throttle (percentage)
+        ('m_frontCamber', ct.c_float),              # Front camber angle (suspension geometry)
+        ('m_rearCamber', ct.c_float),               # Rear camber angle (suspension geometry)
+        ('m_frontToe', ct.c_float),                 # Front toe angle (suspension geometry)
+        ('m_rearToe', ct.c_float),                  # Rear toe angle (suspension geometry)
+        ('m_frontSuspension', ct.c_uint8),          # Front suspension
+        ('m_rearSuspension', ct.c_uint8),           # Rear suspension
+        ('m_frontAntiRollBar', ct.c_uint8),         # Front anti-roll bar
+        ('m_rearAntiRollBar', ct.c_uint8),          # Rear anti-roll bar
+        ('m_frontSuspensionHeight', ct.c_uint8),    # Front ride height
+        ('m_rearSuspensionHeight', ct.c_uint8),     # Rear ride height
+        ('m_brakePressure', ct.c_uint8),            # Brake pressure (percentage)
+        ('m_brakeBias', ct.c_uint8),                # Brake bias (percentage)
+        ('m_rearLeftTyrePressure', ct.c_float),     # Rear left tyre pressure (PSI)
+        ('m_rearRightTyrePressure', ct.c_float),    # Rear right tyre pressure (PSI)
+        ('m_frontLeftTyrePressure', ct.c_float),    # Front left tyre pressure (PSI)
+        ('m_frontRightTyrePressure', ct.c_float),   # Front right tyre pressure (PSI)
+        ('m_ballast', ct.c_uint8),                  # Ballast
+        ('m_fuelLoad', ct.c_float)                  # Fuel load
     ]
 
 class CarTelemetryData(ct.LittleEndianStructure):
@@ -415,7 +420,7 @@ class PacketSessionData(ct.LittleEndianStructure):
         ('m_safetyCarStatus', ct.c_uint8),
         ('m_networkGame', ct.c_uint8),
         ('m_numWeatherForecastSamples', ct.c_uint8),
-        ('m_weatherForecastSamples', WeatherForecastSample * 56),  # missing
+        ('m_weatherForecastSamples', WeatherForecastSample * 56),
         ('m_forecastAccuracy', ct.c_uint8),
         ('m_aiDifficulty', ct.c_uint8),
         ('m_seasonLinkIdentifier', ct.c_uint32),
@@ -438,11 +443,11 @@ class PacketSessionData(ct.LittleEndianStructure):
         ('m_timeOfDay', ct.c_uint32),
         ('m_sessionLength', ct.c_uint8),
         ('m_speedUnitsLeadPlayer', ct.c_uint8),
-        ('m_temperatureUnitsLeadPlayer', ct.c_uint8),  # missing
+        ('m_temperatureUnitsLeadPlayer', ct.c_uint8), 
         ('m_speedUnitsSecondaryPlayer', ct.c_uint8),
-        ('m_temperatureUnitsSecondaryPlayer', ct.c_uint8),  # missing
+        ('m_temperatureUnitsSecondaryPlayer', ct.c_uint8), 
         ('m_numSafetyCarPeriods', ct.c_uint8),
-        ('m_numVirtualSafetyCarPeriods', ct.c_uint8),  # missing
+        ('m_numVirtualSafetyCarPeriods', ct.c_uint8), 
         ('m_numRedFlagPeriods', ct.c_uint8)
     ]
         
