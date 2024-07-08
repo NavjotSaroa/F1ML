@@ -6,7 +6,6 @@ This file will receive data from the F1 game and graph all the relevant car data
 import matplotlib.animation as animation
 import threading
 from UDP import UDP
-import ctypes as ct
 from structures import *
 from matplotlib import pyplot as plt
 import matplotlib.animation as animation
