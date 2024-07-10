@@ -51,6 +51,7 @@ class UDP():
         self.UDP_IP = UDP_IP
         self.UDP_PORT = UDP_PORT
 
+
     def connect(self):
         """
         return: Socket sock
