@@ -2,3 +2,6 @@
 /LiveGrapher.py
 /__pycache__
 models/
+*.pkl
+*.db
+*.zip
