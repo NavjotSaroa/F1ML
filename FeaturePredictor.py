@@ -134,8 +134,8 @@ class FeaturePredictor(MLTime):
         Predicts features for a lap, then predicts the lap time for that lap using those features
         """
         models, lapTime_model = self.load_models()
-
-        test_df = self.get_df().dropna()
+        ref_df = self.get_df().dropna()
+        test_df = self.get_df().dropna().iloc[:,3:]
         test_df = test_df.drop("session_UID", axis = 1)
         first_row = test_df.iloc[0]
         
@@ -155,13 +155,13 @@ class FeaturePredictor(MLTime):
             prediction_df["m_tyresAgeLaps"] = first_row["m_tyresAgeLaps"] + 1
 
             first_row = prediction_df
-            prediction_df_reshaped = prediction_df.iloc[0,3:].values.reshape(1,-1)
+            prediction_df_reshaped = prediction_df.iloc[0].values.reshape(1,-1)
 
             time_prediction = lapTime_model.predict(prediction_df_reshaped)
             print("Predicted time: ",time_prediction[0])
 
-            percent_error = (-(time_prediction[0] - test_df.iloc[3900*(i)]["m_lastLapTimeInMS"]) * 100 / test_df.iloc[3900*(i)]["m_lastLapTimeInMS"])
-            print(time_prediction[0] , test_df.iloc[3900*(i)]["m_lastLapTimeInMS"], percent_error)
+            percent_error = (-(time_prediction[0] - ref_df.iloc[3900*(i)]["m_lastLapTimeInMS"]) * 100 / ref_df.iloc[3900*(i)]["m_lastLapTimeInMS"])
+            print(time_prediction[0] , ref_df.iloc[3900*(i)]["m_lastLapTimeInMS"], percent_error)
 
     def load_models(self):
         """
