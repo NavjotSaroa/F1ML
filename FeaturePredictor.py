@@ -1,17 +1,18 @@
 """
 Author: Navjot Saroa
 
-This file is to make predictions on the features of the model. The problem so far has been
-that no matter how good the lap time predictor will get, it can only predict one lap into the
-future, after that we have no clue what its features are so we cant predict the time either.
+Step 4 of process:
+    This file is to make predictions on the features of the model. The problem so far has been
+    that no matter how good the lap time predictor will get, it can only predict one lap into the
+    future, after that we have no clue what its features are so we cant predict the time either.
 
-Here we identify that these features are either deterministic, they change in consistent ways 
-or stay the same (like total distance increases by about 4320m a lap no matter what), or 
-non-deterministic, the stuff that is hard to predict. We use the deterministic features
-to predict the non-deterministic features. This new set of features is then used to 
-predict the lap times.
+    Here we identify that these features are either deterministic, they change in consistent ways 
+    or stay the same (like total distance increases by about 4320m a lap no matter what), or 
+    non-deterministic, the stuff that is hard to predict. We use the deterministic features
+    to predict the non-deterministic features. This new set of features is then used to 
+    predict the lap times.
 
-The pipeline is very similar to MLTime.
+    The pipeline is very similar to MLTime.
 """
 
 import pandas as pd
