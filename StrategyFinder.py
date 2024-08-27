@@ -2,7 +2,7 @@
 Author: Navjot Saroa
 
 Step 5 of process:
-    This is the last step for all the prediction work, here, we will use a generational learning system
+    This is the last step for all the prediction work, here, we will use a genetic algorithm.
     We produce initial nodes, an equal distribution for soft, medium, and hard tyres. We have each node
     simulate a full race on its own, keeping track of various bits of information. After the simulation
     we choose the best performing nodes to reproduce children, who all have a 1% chance of mutating, who 
