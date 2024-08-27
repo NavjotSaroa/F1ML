@@ -1,5 +1,11 @@
 # F1 Machine Learning Race Strategy Generator
 
+## TL;DR - Key Successes:
+* **Implemented a robust data collection and processing system with zero data loss at 120Hz.**
+* **Achieved a maximum accuracy of 99.975% with a precision window of 0.00001% for car telemetry data and a precision window of 0.07% for lap times, with limited data.**
+* **Developed a custom race strategy model achieving 99.6% race time prediction accuracy**
+
+
 This project is intended to showcase my learnings in the field of live data collection and processing, and machine learning within the context of F1 23 races. The goal was to build a system capable of collecting racing data in real-time, processing it, training machine learning models, and generating optimal pit-stop strategies for full-length races. 
 
 ## Project Phases:
@@ -11,7 +17,7 @@ The project was broken down into 3 phases:
 Each phase has its own objectives and challenges, this README file discusses them.
 
 ## Phase 1: Live Data Collection/Processing:
- **Result of phase: Implemented a robust data collection and processing system with zero data loss at 120Hz.**
+
  
 Relevant files: UDP.py, structures.py, DBMakerL2.py
 
@@ -22,7 +28,6 @@ However, the extent of processing (using structures.py), along with how Sqlite3 
 
 
 ## Phase 2: Model Selection and Training:
-**Result of phase: Achieved a maximum accuracy of 99.975% with a precision window of 0.00001% for car telemetry data and a precision window of 0.07% for lap times, with limited data.** 
 
 Relevant files: makeFeaturesFile.py, MLTime.py, FeaturePredictor.py
 
@@ -33,7 +38,7 @@ Several models were tested, including Decision Trees, XGBoost, and Neural Networ
 
 
 ## Phase 3: Race Strategy Generation
-**Result of phase: Developed a custom race strategy model achieving 99.6% race time prediction accuracy**
+
 
 Relevant files: StrategyFinder.py
 
