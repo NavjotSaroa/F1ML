@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestRegressor
 import scipy.stats as stats
 
 class MLTime():
-    def __init__(self, f, model):
+    def __init__(self, f = "parquet_files/lap_data.parquet", model = RandomForestRegressor()):
         """Constructor"""
         self.model = model
         self.f = f          # f is the file name
@@ -188,4 +188,4 @@ class MLTime():
 if __name__ == "__main__":
     model = RandomForestRegressor()
     f = "parquet_files/lap_data.parquet"
-    MLTime(f, model).model_test(50)
+    MLTime(f, model).make_pickle_file()

@@ -27,7 +27,8 @@ import warnings
 
 
 class FeaturePredictor(MLTime):
-    def __init__(self, f, model, 
+    def __init__(self, f = "parquet_files/lap_data.parquet",
+                model = RandomForestRegressor(), 
                 deterministic_features = [
                     "m_totalDistance", 
                     "isSoft", "isMed", "isHard", 
@@ -142,18 +143,7 @@ class FeaturePredictor(MLTime):
         
         for i in range(40):
             print(f"Lap number: {i}")
-            prediction_df = pd.DataFrame(np.nan, index=[0], columns=test_df.columns) # Creates an empty dataframe to store predicted values in
-
-            for key in models.keys():                                               # Takes models from model directory
-                first_row_reshaped = first_row.values.reshape(1, -1)    
-                prediction = models[key].predict(first_row_reshaped)                # Makes prediction
-                prediction_df[key] = prediction[0]
-
-            prediction_df["m_totalDistance"] = first_row["m_totalDistance"] + 4324.311035   # Update deterministic features
-            prediction_df["isSoft"] = first_row["isSoft"]
-            prediction_df["isMed"] = first_row["isMed"]
-            prediction_df["isHard"] = first_row["isHard"]
-            prediction_df["m_tyresAgeLaps"] = first_row["m_tyresAgeLaps"] + 1
+            prediction_df = self.predict_features(models, first_row)
 
             first_row = prediction_df
             prediction_df_reshaped = prediction_df.iloc[0].values.reshape(1,-1)
@@ -184,6 +174,38 @@ class FeaturePredictor(MLTime):
             
         return (models, lapTime_model)
 
+    def predict_features(self, models, df_single_row):
+        """
+        models is the dictionary of models for each feature.
+        df_single_row is the row of features you want to predict future features on.
+        """
+        init_df = self.get_df().dropna().iloc[:,3:]
+        init_df = init_df.drop("session_UID", axis = 1)
+        prediction_df_row = pd.DataFrame(np.nan, index=[0], columns=init_df.columns)
+        prediction_df_row = prediction_df_row.set_index(df_single_row.index)
+        for key in models.keys():                                               # Takes models from model directory
+            df_single_row_reshaped = df_single_row.values.reshape(1, -1)    
+            prediction = models[key].predict(df_single_row_reshaped)                # Makes prediction
+            prediction_df_row[key] = prediction[0]
+        prediction_df_row["m_totalDistance"] = df_single_row["m_totalDistance"] + 4324.311035   # Update deterministic features
+        prediction_df_row["isSoft"] = df_single_row["isSoft"]
+        prediction_df_row["isMed"] = df_single_row["isMed"]
+        prediction_df_row["isHard"] = df_single_row["isHard"]
+        prediction_df_row["m_tyresAgeLaps"] = df_single_row["m_tyresAgeLaps"] + 1
+        prediction_df_row["lap"] = df_single_row["lap"] + 1
+        
+
+        return prediction_df_row
+    
+    def predict_lap_time(self, model, features):
+        """
+        Predicts lap time just once on the basis of the features given.
+        model is the singular model made in MLTime.
+        features is a row from the dataframe.
+        """
+        features_reshaped = features.values.reshape(1, -1)
+        prediction = model.predict(features_reshaped)
+        return prediction[0]
 
 if __name__ == "__main__":
     # The model works fine so not sure why it yells this at me, either way this should quieten it down
