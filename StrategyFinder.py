@@ -174,7 +174,8 @@ class EvaluateStrategy:
             generations -= 1
 
 
-        print([pit for pit in actors_lst[0].pit_stops if pit[1] != 0], convert_milliseconds(actors_lst[0].total_lap_time))
+        print("Pit Strategy: ", [pit for pit in actors_lst[0].pit_stops if pit[1] != 0])
+        print("Predicted Race Time: ", convert_milliseconds(actors_lst[0].total_lap_time))
     
     def valid_strategy(self, pit_lst):
         """
